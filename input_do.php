@@ -17,11 +17,18 @@
 
 <main>
 <h2>Practice</h2>
+<pre>
+    <!-- フォームからの情報を保存する -->
+<?php
+    require('dbconnect.php');
 
-<form action="input_do.php" method="POST">
-    <textarea name="memo" cols="50" rows="10" placeholder="自由にメモを残してください"></textarea><br>
-    <button type="submit">登録する</button>
-</form>
+    $statement = $db->prepare('INSERT INTO memos SET memo=?, created_at=NOW()');
+    $statement->bindParam(1, $_POST['memo']);
+    $statement->execute();
+    echo 'メッセージが登録されました';
+    // $statement->execute(array($_POST['memo']));
+?>
+</pre>
 </main>
 </body>    
 </html>
